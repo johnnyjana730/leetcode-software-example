@@ -1,0 +1,29 @@
+class Solution(object):
+    def findPaths(self, R, C, N, sr, sc):
+        #RxC grid , make N moves
+        #start at sr, sc
+        def neighbors(r, c):
+            for cr, cc in ((r-1,c),(r+1,c),(r,c-1),(r,c+1)):
+                yield cr, cc
+        def legal(r, c):
+            return 0 <= r < R and 0 <= c < C
+        
+        MOD = 10**9 +7
+        dp = [[0] * C for _ in xrange(R)]
+        dp[sr][sc] = 1
+        ans = 0
+        for move in xrange(N):
+            new = [[0] * C for _ in xrange(R)]
+            for r, row in enumerate(dp):
+                for c, val in enumerate(row):
+                    for nr, nc in neighbors(r, c):
+                        if legal(nr, nc):
+                            new[nr][nc] += val
+                            if new[nr][nc] >= MOD:
+                                new[nr][nc] %= MOD
+                        else:
+                            ans += val
+                            if ans >= MOD:
+                                ans %= MOD
+            dp = new
+        return ans

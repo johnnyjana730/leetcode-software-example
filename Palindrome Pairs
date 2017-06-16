@@ -1,0 +1,12 @@
+        r = []
+        w = {}
+        for i in range(len(words)):
+            w[words[i]] = i
+        for index in range(len(words)):
+            s =  words[index]
+            for i in range(len(s)+1):
+                if i!= 0 and s[i:][::-1] in w and index != w[s[i:][::-1]] and s[0:i][::-1] == s[0:i]:
+                    r.append((w[s[i:][::-1]],index))
+                if s[0:i][::-1] in w and index != w[s[0:i][::-1]] and s[i:][::-1] == s[i:]:
+                    r.append((index,w[s[0:i][::-1]]))
+        return r

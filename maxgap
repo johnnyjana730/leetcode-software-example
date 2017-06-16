@@ -1,0 +1,15 @@
+    def maximumGap(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) >= 2:
+            maxV, minV = max(nums), min(nums)
+            gap, bs = (maxV-minV)//(len(nums)-1), [[] for _ in nums]
+            for n in nums:
+                bs[(n-minV)//(gap+1)].append(n)
+                print gap
+            bs = filter(None, bs)
+            print bs,gap
+            print zip(bs[1:],bs[:-1])
+        return max([min(a)-max(b) for a,b in zip(bs[1:],bs[:-1])]+[gap]) if len(nums)>=2 else 0

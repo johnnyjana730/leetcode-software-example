@@ -1,0 +1,13 @@
+def isvaild(x,k):
+            for i in range(len(queens)):
+                if queens[i] == x or queens[i] + i == x + k or queens[i] - i == x - k: return False
+            return True
+        
+        def nextline(k,n):
+            if k == n: solution.append(queens[0:]); return
+            for x in range(n):
+                if isvaild(x,k): queens.append(x); nextline(k+1,n); queens.pop()
+
+        queens, solution = [], []
+        nextline(0,n)
+        return [["."*x + "Q" + "."*(n-x-1) for x in i] for i in solution]

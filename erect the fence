@@ -1,0 +1,18 @@
+        def sign(p, q, r):
+            print (p.x,p.y),(q.x,q.y),(r.x,r.y),(p.x - r.x)*(q.y - r.y), (p.y - r.y)*(q.x - r.x)
+            return cmp((p.x - r.x)*(q.y - r.y), (p.y - r.y)*(q.x - r.x))
+    
+        def drive(hull, r):
+            hull.append(r)
+            while len(hull) >= 3 and sign(*hull[-3:]) < 0:
+                k =  hull.pop(-2)
+                print (k.x,k.y)
+            return hull
+    
+        A.sort(key = lambda p: (p.x, p.y))
+        print [(x.x,x.y) for x in A]
+        lower = reduce(drive, A, [])
+        print [(x.x,x.y) for x in lower],'end'
+        upper = reduce(drive, A[::-1], [])
+        return list(set(lower + upper))
+        

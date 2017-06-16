@@ -1,0 +1,10 @@
+    def halfcompare(self,nums,d):
+        if  len(d) == 0: return 0
+        elif  nums < d[0]: return 0
+        elif  nums > d[-1]: return len(d)
+        s_t, a_f = 0, len(d) - 1
+        while True:
+            h_n = (s_t + a_f)/2
+            if nums <= d[h_n]: a_f = h_n
+            else: s_t = h_n
+            if s_t + 1 >= a_f: return (s_t + 1) if nums > d[s_t] else s_t

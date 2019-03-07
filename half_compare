@@ -1,0 +1,13 @@
+        def half_compare(num,d):
+            if len(d) == 0: return 0
+            elif num < d[0].val: return 0
+            elif num > d[-1].val: return len(d)
+            L, R = 0, len(d)-1
+            while True:
+                half = int((L+R)/2)
+                if d[half] > num:
+                    R = half
+                else:
+                    L = half
+                if L +1 >= R:
+                    return L + 1 if num > d[half] else L
